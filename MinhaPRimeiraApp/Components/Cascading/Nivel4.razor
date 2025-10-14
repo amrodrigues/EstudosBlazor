@@ -1,0 +1,17 @@
+﻿@using MinhaPrimeiraApp.Components.Cascading  
+@inject NavigationManager NavManager  
+
+<div class="p-4 mt-4 ml-4 rounded-lg border border-white/50 text-white shadow-inner"
+     style="background-color:@StyleContext.BackgroundColor; opacity: 0.8;">
+    <h4 class="text-md font-semibold">Componente de Nível 3 (Neto)</h4>
+    <p class="text-sm">Eu também recebo a cor, sem precisar de parâmetros explícitos.</p>
+
+    <!-- Renderiza o Nivel4 (Opcional, apenas para fins de demonstração) -->
+    <Nivel4 />
+</div>
+
+@code {
+    // RECEBE o valor em cascata do Nível 2.
+    [CascadingParameter]
+    public StyleContext StyleContext { get; set; }
+}

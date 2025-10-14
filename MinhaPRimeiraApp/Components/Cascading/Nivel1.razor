@@ -1,0 +1,36 @@
+﻿@page "/cascading-parameters"
+@rendermode InteractiveServer
+@using MinhaPrimeiraApp.Components.Cascading    
+
+<h2 class="text-xl font-bold mb-4">Componente Nível 1 (Pai)</h2>
+
+<CascadingValue Value="@StyleContext">
+    <!-- Nivel2 é o componente descendente que vai RECEBER o StyleContext -->
+    <Nivel2 />
+</CascadingValue>
+
+<div class="mt-8 p-4 rounded-lg shadow-md"
+     style="border: 2px dashed #9ca3af; background-color:@StyleContext.BackgroundColor">
+
+    <label class="block font-semibold mb-2 text-gray-800">Selecione uma cor de fundo (Local):</label>
+
+    <!-- @bind usa a propriedade BackgroundColor da instância StyleContext -->
+    <input type="color" @bind="StyleContext.BackgroundColor"
+           class="w-full h-10 border-2 border-gray-300 rounded-md cursor-pointer" />
+
+    <p class="text-sm mt-2 text-gray-600">Cor Atual: @StyleContext.BackgroundColor</p>
+</div>
+
+@code {
+    // ❌ REMOVIDO: O atributo [CascadingParameter] para evitar conflito.
+
+    // A propriedade deve ser inicializada aqui para que NUNCA seja nula quando o Razor a acessar.
+    // O valor inicial é passado para o componente <CascadingValue> e, dali, para <Nivel2 />.
+    private StyleContext StyleContext { get; set; } = new StyleContext
+    {
+        BackgroundColor = "#ADD8E6" // Azul claro padrão
+    };
+
+    // Lembrete: Como o StyleContext implementa INotifyPropertyChanged, a mudança
+    // feita no input automaticamente re-renderiza Nivel2.
+}

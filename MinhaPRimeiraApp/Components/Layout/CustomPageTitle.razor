@@ -1,0 +1,11 @@
+﻿@code {
+    [Parameter]
+
+    public string Title { get; set; } 
+}
+
+@{
+    var pageTitle = string.IsNullOrWhiteSpace(Title) ? "Minha Primeira App Blazor" : $"{Title} - Minha Primeira App";
+}
+
+<PageTitle>@pageTitle</PageTitle>

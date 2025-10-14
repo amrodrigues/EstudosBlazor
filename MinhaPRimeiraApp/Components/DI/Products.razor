@@ -1,0 +1,29 @@
+﻿@page "/products"
+@using MinhaPrimeiraApp.Components.DI
+@rendermode InteractiveServer
+@inject IProductService ProductService
+
+<h3>Lista de Produtos</h3>
+
+@if (products == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var product in products)
+        {
+            <li>@product.Name - @product.Price.ToString("C")</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Product> products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductService.GetProductsAsync();
+    }
+}

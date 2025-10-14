@@ -1,0 +1,19 @@
+﻿@using MinhaPrimeiraApp.Components.Cascading  
+
+<div class="p-6 mt-4 rounded-lg text-white font-medium shadow-xl transition-all duration-300"
+     style="background-color:@StyleContext.BackgroundColor; padding: 10px;">
+    <h3 class="text-lg">Componente de Nível 2 (Filho Direto)</h3>
+    <p class="text-sm italic">Eu recebi a cor em cascata do Nível 1.</p>
+
+    <!-- Renderiza o Nivel3, que receberá o StyleContext em cascata também -->
+    <Nivel3 />
+</div>
+
+@code {
+    // Aqui usamos [CascadingParameter] para RECEBER o valor que o componente pai (Nível 1) está ENVIANDO.
+    [CascadingParameter]
+    public StyleContext StyleContext { get; set; }
+
+    // Nota: Como o StyleContext é um objeto, ele nunca deve ser null. Se for,
+    // o problema pode estar na ausência do @using acima, o que acabamos de corrigir.
+}
