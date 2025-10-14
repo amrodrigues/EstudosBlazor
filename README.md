@@ -44,4 +44,22 @@ app.MapRazorComponents<App>()
 
 * Components/: Contém os componentes Razor, layouts e a estrutura principal do Blazor.
 
-* MinhaPRimeiraApp.Client/: (Se for uma solução com múltiplos projetos) O projeto dedicado que contém o código a ser compilado para WebAssembly.
+ # Roteamento Parametrizado (Blazor Components)
+
+Neste projeto, utilizamos **rotas parametrizadas** (ou *route templates*) para carregar componentes com base em dados específicos fornecidos na URL.
+
+Essa abordagem é crucial para exibir a página de detalhes de um usuário, garantindo que o `Id` (Identificador) do usuário seja capturado diretamente da rota e seja do tipo correto.
+
+## 1. Definição da Rota (`@page`)
+
+A rota para a página de detalhes do usuário é definida no topo do componente `UserDetalhe.razor` através da diretiva `@page`.
+
+### Estrutura da Rota:
+
+```razor
+@page "/users/{Id:int}"
+```
+Parte	Explicação
+- "/users"	É o caminho base da URL.
+- {Id:int}	Define um parâmetro de rota chamado Id.
+- :int	É uma restrição de tipo. Ela informa ao sistema de roteamento do Blazor que o valor capturado para Id deve ser um número inteiro.
