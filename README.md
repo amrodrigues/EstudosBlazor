@@ -63,3 +63,47 @@ Parte	Explicação
 - "/users"	É o caminho base da URL.
 - {Id:int}	Define um parâmetro de rota chamado Id.
 - :int	É uma restrição de tipo. Ela informa ao sistema de roteamento do Blazor que o valor capturado para Id deve ser um número inteiro.
+
+- ## Roteamento Parametrizado para Tratamento de Erros
+
+O componente `Erro.razor` demonstra o uso de rotas parametrizadas para criar uma página dinâmica de exibição de erros, onde a mensagem exibida ao usuário é determinada pelo código de status HTTP passado na URL.
+
+### Componente: `Erro.razor`
+
+#### 1. Definição da Rota
+
+A rota utiliza o parâmetro `{code}` com a restrição de tipo `:int` para garantir que apenas códigos numéricos válidos sejam processados.
+
+```razor
+@page "/erro/{code:int}"
+```
+```
+@code {
+    string Message = string.Empty;
+
+    [Parameter]
+    public int code { get; set; }
+
+    protected override void OnInitialized()
+    {
+        switch (code)
+        {
+            case 401:
+                Message = "Não te conheço"; // Não Autorizado
+                break;
+            case 403:
+                Message = "Te conheço mas você não tem acesso!"; // Proibido
+                break;
+            case 404:
+                Message = "Página não encontrada"; // Not Found
+                break;
+            case 500:
+                Message = "Erro no servidor"; // Erro Interno do Servidor
+                break;
+            default:
+                Message = "Erro desconhecido";
+                break;
+        }
+    }
+}
+```
