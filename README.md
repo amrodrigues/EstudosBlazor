@@ -77,6 +77,14 @@ A rota utiliza o parâmetro `{code}` com a restrição de tipo `:int` para garan
 ```razor
 @page "/erro/{code:int}"
 ```
+#### 2. Parametrização
+Temos que parametrizar o erro na Program.cs
+```razor
+app.UseStatusCodePagesWithRedirects("/erro/{0}");
+```
+#### 3. Estrutura da class erro (componente)
+Estrutura do componemte de erro:
+
 ```
 @code {
     string Message = string.Empty;
