@@ -115,3 +115,26 @@ Estrutura do componemte de erro:
     }
 }
 ```
+
+## Restrições de Rotas Avançadas (Route Constraints)
+
+Neste projeto, exploramos o uso de **restrições de tipo** avançadas para garantir que os parâmetros de rota correspondam ao tipo de dado esperado. Isso previne o `InvalidCastException` e melhora a segurança e a robustez da aplicação.
+
+### 1. Rota com Múltiplas Restrições e Parâmetro Opcional
+
+A rota `/restricao-rota1/{id:int}/{option:bool?}` ilustra o uso de duas restrições e um parâmetro opcional:
+
+| Parâmetro | Restrição | Explicação | Exemplo de URL |
+| :--- | :--- | :--- | :--- |
+| `{id:int}` | `:int` | Obriga o valor a ser um número inteiro (`System.Int32`). | `/restricao-rota1/123` |
+| `{option:bool?}` | `:bool` | Obriga o valor a ser um booleano (`true` ou `false`). O `?` torna o parâmetro **opcional** na URL. | `/restricao-rota1/123/true` |
+
+### 2. Rota com GUID (Identificador Global Único)
+
+A rota `/restricao-rota2/{uid:guid}` demonstra a restrição para identificadores globais:
+
+| Parâmetro | Restrição | Explicação | Exemplo de URL |
+| :--- | :--- | :--- | :--- |
+| `{uid:guid}` | `:guid` | Obriga o valor a ser formatado como um GUID válido (`System.Guid`), como `xxxxxxxx-xxxx-...`. | `/restricao-rota2/a1b2c3d4-...` |
+
+Essas restrições garantem que o Blazor Router só resolva a navegação se o formato dos dados na URL for compatível com o tipo de dado C# esperado na propriedade `[Parameter]`.
